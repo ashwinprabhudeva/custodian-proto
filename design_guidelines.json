@@ -1,0 +1,63 @@
+{
+  "project_name": "Custodian",
+  "scope": "Manipal & Udupi, Karnataka Cultural Tourism Platform",
+  "typography": {
+    "heading_font": "Playfair Display, serif",
+    "body_font": "Plus Jakarta Sans, sans-serif",
+    "weights": ["300", "400", "500", "600", "700", "900"],
+    "rules": "Headings use Playfair Display with tight tracking. Body uses Plus Jakarta Sans for extreme legibility and warm human editorial feel."
+  },
+  "colors": {
+    "archetype": "Organic & Earthy",
+    "primary": "#8B4513",
+    "primary_hover": "#A0522D",
+    "accent": "#D2691E",
+    "background": "#FDFBF7",
+    "card_bg": "#FFFFFF",
+    "text_main": "#2C221E",
+    "text_muted": "#6B5B53",
+    "border": "#E6DFD5",
+    "terracotta": "#C85A32",
+    "moss_green": "#4A6B5B",
+    "sand": "#F4EFE6"
+  },
+  "visual_enhancers": {
+    "texture": "Subtle warm paper grain background #FDFBF7 with 1px earthy borders",
+    "shadows": "Diffuse warm ambient shadows shadow-[0_8px_30px_rgb(139,69,19,0.06)]",
+    "border_radius": "Rounded-xl to rounded-2xl for organic warmth"
+  },
+  "grids": {
+    "discovery_feed": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+    "bento_profile": "grid grid-cols-1 md:grid-cols-12 gap-8"
+  },
+  "layouts": {
+    "max_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "spacing": "Generous py-16 px-6 gaps"
+  },
+  "motion": {
+    "transitions": "transition-all duration-300 ease-in-out",
+    "hover_lift": "hover:-translate-y-1 hover:shadow-lg"
+  },
+  "accessibility": {
+    "contrast": "WCAG AA compliant warm earthy contrast, high visibility text",
+    "data_testid": "MANDATORY on all interactive and informational elements"
+  },
+  "image_urls": [
+    {
+      "category": "Yakshagana Performer",
+      "image_url": "https://images.unsplash.com/photo-1707344238570-04d1d233090c?q=85&w=800&auto=format&fit=crop",
+      "description": "Traditional Yakshagana performer in elaborate costume and headgear"
+    },
+    {
+      "category": "Coastal Fisherman",
+      "image_url": "https://images.unsplash.com/photo-1708880816742-d1b07543fbea?q=85&w=800&auto=format&fit=crop",
+      "description": "Coastal boat and Malpe shore"
+    }
+  ],
+  "universal_guidelines": [
+    "Never use pure black #000000; use deep warm charcoal #2C221E",
+    "Every interactive element must have data-testid",
+    "No generic XP/level-up gamification; use personal scrapbook and badge showcase feeling",
+    "Custodian consent framework with 6 active toggles clearly exposed"
+  ]
+}
