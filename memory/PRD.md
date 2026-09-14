@@ -33,6 +33,14 @@ Build “Custodian,” a cultural-tourism platform for Manipal and Udupi where l
 - Added functional responsive mobile navigation and verified it at phone width.
 - Verified API regression, frontend journeys, responsive overflow, build, and no-console-error regression tests.
 
+### 2026-09-14
+- Replaced the Food experience with a traditional Udupi banana-leaf vegetarian meal and coffee, with a purpose-built matching image.
+- Replaced the Ritual / Religious image with an authentic coastal Karnataka temple ritual scene.
+- Added guest count controls to booking requests and carried the selected guest count into the pending state and API payload.
+- Added a short custodian story block to each experience detail page.
+- Reworked Mystery Local to preserve the selected category, hide the exact experience until a request is pending, and reveal only after the prototype confirmation step.
+- Changed the first-visit tourist passport so Time Capsule exists but remains locked, with no pre-unlocked messages or learned skills.
+
 ## Prioritized backlog
 - P0: Keep the prototype flows stable and continue validating the seeded content with local cultural partners.
 - P1: Add persistent profiles and booking history when the prototype moves beyond seeded demo data.

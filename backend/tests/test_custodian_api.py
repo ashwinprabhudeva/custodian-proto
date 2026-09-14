@@ -46,7 +46,7 @@ class TestCustodianApi:
         body = response.json()
         assert body["status"] == "pending_confirmation"
         assert body["guests"] == 2
-        assert body["experience"] == "Filter coffee at our family table"
+        assert body["experience"] == "A proper Udupi meal on a banana leaf"
 
     def test_legacy_rejects_blank_and_accepts_question(self):
         blank = requests.post(f"{BASE_URL}/api/legacy", json={"experience_id": "coffee", "text": "  "}, timeout=15)
