@@ -41,6 +41,13 @@ Build “Custodian,” a cultural-tourism platform for Manipal and Udupi where l
 - Reworked Mystery Local to preserve the selected category, hide the exact experience until a request is pending, and reveal only after the prototype confirmation step.
 - Changed the first-visit tourist passport so Time Capsule exists but remains locked, with no pre-unlocked messages or learned skills.
 
+### 2026-06 (fork)
+- Replaced the Kambala experience photo with a documentary buffalo-pair image (CDN-hosted).
+- Replaced the ritual/temple photo with a softer, welcoming dawn courtyard image.
+- Expanded all six custodian stories; added a Michelin-starred-chef-returns-home backstory for the food host (Anitha).
+- Implemented dynamic pricing UI on the booking panel: for Fixed-price experiences, live total (per person × guests) shown in a total row and on the "Pay ₹X · Request" button; for Donation/Negotiable, guest counter kept with a note ("Donation-based — pay what feels right" / "Negotiable — agree together").
+- Added graceful API error/fallback states with retry to Home, Detail, and Custodian pages (fixes Iteration 3 finding on hanging loading states).
+
 ## Prioritized backlog
 - P0: Keep the prototype flows stable and continue validating the seeded content with local cultural partners.
 - P1: Add persistent profiles and booking history when the prototype moves beyond seeded demo data.
