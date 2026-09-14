@@ -48,6 +48,10 @@ Build “Custodian,” a cultural-tourism platform for Manipal and Udupi where l
 - Implemented dynamic pricing UI on the booking panel: for Fixed-price experiences, live total (per person × guests) shown in a total row and on the "Pay ₹X · Request" button; for Donation/Negotiable, guest counter kept with a note ("Donation-based — pay what feels right" / "Negotiable — agree together").
 - Added graceful API error/fallback states with retry to Home, Detail, and Custodian pages (fixes Iteration 3 finding on hanging loading states).
 
+### 2026-06 (fork, part 2)
+- **Shareable passport card**: the tourist passport "Share my field notes" button now opens a designer story-card modal (dark editorial card with brand, tagline, badge grid). Uses `html-to-image` to export a PNG (Download), plus native Web Share (with file) and Copy-link fallbacks. New component `PassportShareCard`.
+- **Real custodian dashboard backend**: added `GET/PUT /api/custodian/{custodian_id}/settings` persisting six consent toggles + availability days to MongoDB collection `custodian_settings` (seeds defaults on first read). Dashboard now loads saved state, toggles + clickable calendar days persist on tap with a live "Saved" indicator, and has an error/retry fallback.
+
 ## Prioritized backlog
 - P0: Keep the prototype flows stable and continue validating the seeded content with local cultural partners.
 - P1: Add persistent profiles and booking history when the prototype moves beyond seeded demo data.

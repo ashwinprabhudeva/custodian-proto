@@ -46,6 +46,13 @@ class LegacyCreate(BaseModel):
     experience_id: str
     text: str
 
+class SettingsUpdate(BaseModel):
+    consent: dict
+    available_days: List[int]
+
+DEFAULT_CONSENT = {"visibility": True, "access": True, "framing": True, "pricing": True, "participation": False, "revocability": True}
+DEFAULT_DAYS = [5, 12, 19, 26]
+
 EXPERIENCES = [
     {"id":"yakshagana","title":"An evening inside Yakshagana","category":"Performance","region":"Udupi","custodian":"Raghav Bhandary","role":"Yakshagana performer","image":"https://images.unsplash.com/photo-1707344238570-04d1d233090c?q=85&w=1000&auto=format&fit=crop","tone":"terracotta","price":"Donation-based","price_note":"₹400 suggested","cap":"Capped at 15 people","policy":"No close-up photography during sequences","participation":"Watch-only","season":"Available most evenings","verified":"Udupi Yakshagana Kala Kendra","boosted":True,"description":"I grew up backstage, folding costumes and listening for the chende to begin — the drum that tells your heartbeat when to change. My grandfather painted his own face for forty years; I knew the stories before I could read. Come sit close enough to feel the rhythm rise through the floor, but give the performers the space the story needs. We begin after dusk and do not stop until the demon is defeated.","review":"The moment the drums started, the whole room changed. Raghav made us feel like guests, not an audience.","reviewer":"Maya, Bengaluru","bio":"Third-generation Yakshagana performer and keeper of a small rehearsal space near Manipal, where he trains younger artists and repairs the heavy painted crowns by hand.","legacy":["Which character should a first-time visitor watch for?","What does the red face paint mean in this story?"]},
     {"id":"coffee","title":"A proper Udupi meal on a banana leaf","category":"Food","region":"Manipal","custodian":"Anitha Pai","role":"Home cook & coffee host","image":"https://static.prod-images.emergentagent.com/jobs/3514529a-2e4d-44e7-ac68-03f047d59898/images/e3b15b876b6402da80b2f640499e0fb405532756326711df31f9ea6e2992476e.jpeg","tone":"moss","price":"Fixed price","price_note":"₹1,400 per person","cap":"Small group: 2–4","policy":"Please ask before photographing our home","participation":"Hands-on","season":"Available year-round","verified":"Coastal Foodways Collective","boosted":True,"description":"We will eat the way my family eats on a good Sunday — rice, sambar, a rotation of vegetables, kosambari, tangy majjige huli, payasam to finish, and coffee poured high from the steel davara until it foams. I spent twelve years cooking in restaurant kitchens abroad, one of them Michelin-starred, plating tiny beautiful things for people I never met. I came home because the food I missed most was the food nobody was writing about. Now I cook it for anyone curious enough to sit close to my kitchen. Come hungry.","review":"The banana leaf meal felt like being welcomed into a real Sunday, not attending a demonstration.","reviewer":"Arjun, Mumbai","bio":"Anitha trained and cooked for over a decade in fine-dining kitchens across Europe — including a Michelin-starred restaurant — before returning home to Manipal. Today she hosts from her family home purely for the joy of it, sharing a full Udupi-style vegetarian meal, the small rituals around it, and her quiet mission to champion coastal Karnataka's everyday cooking.","legacy":["Ask about the brass filter — it has a story."]},
@@ -83,6 +90,20 @@ async def create_legacy(input: LegacyCreate):
     if not input.text.strip():
         raise HTTPException(status_code=400, detail="Reflection cannot be empty")
     return {"id": str(uuid.uuid4()), "experience_id": input.experience_id, "text": input.text, "status":"visible_to_future_visitors"}
+
+@api_router.get("/custodian/{custodian_id}/settings")
+async def get_custodian_settings(custodian_id: str):
+    doc = await db.custodian_settings.find_one({"custodian_id": custodian_id}, {"_id": 0})
+    if not doc:
+        doc = {"custodian_id": custodian_id, "consent": DEFAULT_CONSENT, "available_days": DEFAULT_DAYS}
+        await db.custodian_settings.insert_one(dict(doc))
+    return doc
+
+@api_router.put("/custodian/{custodian_id}/settings")
+async def update_custodian_settings(custodian_id: str, input: SettingsUpdate):
+    doc = {"custodian_id": custodian_id, "consent": input.consent, "available_days": input.available_days, "updated_at": datetime.now(timezone.utc).isoformat()}
+    await db.custodian_settings.update_one({"custodian_id": custodian_id}, {"$set": doc}, upsert=True)
+    return doc
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
